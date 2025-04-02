@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robotic_arm_1">
+
+  <!-- Properties for links and joints -->
+  <xacro:property name="arm_base_link_mass" value="0.252551886669556"/>
+  <xacro:property name="capstan_arm_link_mass" value="0.709466626058235"/>
+  <xacro:property name="arm_link_1_mass" value="2.02559987896371"/>
+  <xacro:property name="arm_link_2_mass" value="1.03057802437217"/>
+
+  <xacro:property name="arm_base_link_ixx" value="0.000150902038596133"/>
+  <xacro:property name="arm_base_link_ixy" value="0"/>
+  <xacro:property name="arm_base_link_ixz" value="4.39682919984636E-07"/>
+  <xacro:property name="arm_base_link_iyy" value="0.000150053189033015"/>
+  <xacro:property name="arm_base_link_iyz" value="0"/>
+  <xacro:property name="arm_base_link_izz" value="0.000253108560055644"/>
+
+  <xacro:property name="capstan_arm_ixx" value="0.00165051336508958"/>
+  <xacro:property name="capstan_arm_ixy" value="2.46957606770886E-05"/>
+  <xacro:property name="capstan_arm_ixz" value="4.63627043374479E-06"/>
+  <xacro:property name="capstan_arm_iyy" value="0.00111101449924064"/>
+  <xacro:property name="capstan_arm_iyz" value="-0.000105517085889965"/>
+  <xacro:property name="capstan_arm_izz" value="0.00236018957372939"/>
+
+  <xacro:property name="arm_link_1_ixx" value="0.0122955056364337"/>
+  <xacro:property name="arm_link_1_ixy" value="1.37460312510447E-05"/>
+  <xacro:property name="arm_link_1_ixz" value="-9.58057581347945E-07"/>
+  <xacro:property name="arm_link_1_iyy" value="0.012829700926555"/>
+  <xacro:property name="arm_link_1_iyz" value="-3.72564629302058E-05"/>
+  <xacro:property name="arm_link_1_izz" value="0.00154118844811022"/>
+
+  <xacro:property name="arm_link_2_ixx" value="0.00633876312594691"/>
+  <xacro:property name="arm_link_2_ixy" value="-4.16173532851258E-19"/>
+  <xacro:property name="arm_link_2_ixz" value="-5.83484875325359E-19"/>
+  <xacro:property name="arm_link_2_iyy" value="0.00713091971056394"/>
+  <xacro:property name="arm_link_2_iyz" value="6.36398687437939E-05"/>
+  <xacro:property name="arm_link_2_izz" value="0.00119228700277233"/>
+
+  <!-- Define links -->
+  <link name="arm_base_link">
+    <inertial>
+      <origin xyz="-0.00010245634218275 2.45859996157774E-06 0.0214724928778274" rpy="0 0 0"/>
+      <mass value="${arm_base_link_mass}"/>
+      <inertia ixx="${arm_base_link_ixx}" ixy="${arm_base_link_ixy}" ixz="${arm_base_link_ixz}" iyy="${arm_base_link_iyy}" iyz="${arm_base_link_iyz}" izz="${arm_base_link_izz}"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://robotic_arm_1/meshes/arm_base_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robotic_arm_1/meshes/arm_base_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="Capstan_arm_link">
+    <inertial>
+      <origin xyz="0.0070643032220165 -0.0122764637999162 0.0362543103918512" rpy="0 0 0"/>
+      <mass value="${capstan_arm_link_mass}"/>
+      <inertia ixx="${capstan_arm_ixx}" ixy="${capstan_arm_ixy}" ixz="${capstan_arm_ixz}" iyy="${capstan_arm_iyy}" iyz="${capstan_arm_iyy}" izz="${capstan_arm_izz}"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.09 0 -0.06" rpy="1.5708 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://robotic_arm_1/meshes/Capstan_arm_link.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robotic_arm_1/meshes/Capstan_arm_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Define joints -->
+  <joint name="Joint_1_Capstan" type="revolute">
+    <origin xyz="-0.08825 0 0.0435" rpy="0 0 -0.045315"/>
+    <parent link="arm_base_link"/>
+    <child link="Capstan_arm_link"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="-1.4" upper="1.4" effort="36" velocity="0.2"/>
+  </joint>
+
+  <link name="arm_link_1">
+    <inertial>
+      <origin xyz="-1.90466102472087E-05 -0.00074067503085362 0.312950666881576" rpy="0 0 0"/>
+      <mass value="${arm_link_1_mass}"/>
+      <inertia ixx="${arm_link_1_ixx}" ixy="${arm_link_1_ixy}" ixz="${arm_link_1_ixz}" iyy="${arm_link_1_iyy}" iyz="${arm_link_1_iyz}" izz="${arm_link_1_izz}"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.09 0 -0.16" rpy="1.5708 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://robotic_arm_1/meshes/arm_link_1.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robotic_arm_1/meshes/arm_link_1.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="arm_link_1_joint" type="revolute">
+    <origin xyz="0.0001812 -0.0039959 0.104" rpy="0 0 0.071024"/>
+    <parent link="Capstan_arm_link"/>
+    <child link="arm_link_1"/>
+    <axis xyz="-0.025707 -0.99967 0"/>
+    <limit lower="-0.5" upper="1.4" effort="25" velocity="0.1"/>
+  </joint>
+
+  <link name="arm_link_2">
+    <inertial>
+      <origin xyz="-3.23352455922077E-15 0.00799925604693499 0.246348425307334" rpy="0 0 0"/>
+      <mass value="${arm_link_2_mass}"/>
+      <inertia ixx="${arm_link_2_ixx}" ixy="${arm_link_2_ixy}" ixz="${arm_link_2_ixz}" iyy="${arm_link_2_iyy}" iyz="${arm_link_2_iyz}" izz="${arm_link_2_izz}"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.091 0 -0.9" rpy="1.5708 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://robotic_arm_1/meshes/arm_link_2.STL"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robotic_arm_1/meshes/arm_link_2.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="arm_link_2_joint" type="revolute">
+    <origin xyz="-0.0001928 -0.0074975 0.73665" rpy="0 0 -0.02571"/>
+    <parent link="arm_link_1"/>
+    <child link="arm_link_2"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="-1.4" upper="1.4" effort="12" velocity="0.15"/>
+  </joint>
+
+</robot>
+
