@@ -170,7 +170,7 @@
 
 <!-- ARM LINK - 1 -->
 
- <link
+  <link
     name="arm_link_1">
     <inertial>
       <origin
@@ -231,13 +231,13 @@
   <link name="arm_link_1_helper">
   <inertial>
     <origin xyz="0 0 0" rpy="0 0 0"/>
-    <mass value="0.001"/>  <!--Small mass to avoid issues -->
+    <mass value="0.001"/>  
   <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
   </inertial>
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <box size="0.01 0.01 0.01"/>  <!--Small invisible cube -->
+      <box size="0.01 0.01 0.01"/>  
    </geometry>
     <material name="black"/>
   </visual>
@@ -319,5 +319,85 @@
       upper="1.4"
       effort="12"
       velocity="0.15" />
-  </joint> 
+  </joint>
+<!-- Transmission tags for gazebo -->
+
+<!-- For capstan Joint -->
+<transmission name="capstan_arm_trans">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="capstan_arm">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="capstan_motor">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<!-- Transmission for Joint 1 -->
+<transmission name="base_arm_rot_trans">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="base_arm_rot">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="base_arm_rot_motor">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<!-- Transmission for Joint 2 -->
+<transmission name="arm_elbow_trans">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="arm_elbow">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="arm_elbow_motor">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+<transmission name="arm_elbow_roll_trans">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="arm_elbow_roll">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="arm_elbow_roll_motor">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+
+
+<!-- Control joint defination for Gazebo --> 
+<!-- <gazebo>
+  <joint name="capstan_arm">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+  </joint>
+</gazebo>
+
+<gazebo>
+  <joint name="base_arm_rot">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+  </joint>
+</gazebo>
+
+<gazebo>
+  <joint name="arm_elbow">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+  </joint>
+</gazebo>
+
+<gazebo>
+  <joint name="arm_elbow_roll">
+    <hardwareInterface>EffortJointInterface</hardwareInterface>
+  </joint>
+</gazebo> -->
+  <!-- Gazebo control recq -->
+  <!-- Gazebo will go black if no controller is defined and uncommented -->
+ <gazebo>
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"/>
+    <robotNamespace> Adesh_Arm </robotNamespace>
+</gazebo> 
 </robot>
