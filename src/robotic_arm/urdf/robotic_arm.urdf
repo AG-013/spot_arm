@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
-     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
-     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
-<!-- Owner: Adesh Grewal
-    email: adeshgrewalwk@gmail.com -->
+
 <robot
   name="robotic_arm">
   <link name="world"/>
@@ -320,16 +316,17 @@
       effort="12"
       velocity="0.15" />
   </joint>
-<!-- Transmission tags for gazebo -->
 
+
+<!-- Transmission tags for gazebo -->
 <!-- For capstan Joint -->
 <transmission name="capstan_arm_trans">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="capstan_arm">
-    <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
   <actuator name="capstan_motor">
-    <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
@@ -338,10 +335,10 @@
 <transmission name="base_arm_rot_trans">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="base_arm_rot">
-    <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
   <actuator name="base_arm_rot_motor">
-    <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
@@ -350,54 +347,32 @@
 <transmission name="arm_elbow_trans">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="arm_elbow">
-    <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
   <actuator name="arm_elbow_motor">
-    <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
+
+<!-- Transmission for Joint 3 -->
 <transmission name="arm_elbow_roll_trans">
   <type>transmission_interface/SimpleTransmission</type>
   <joint name="arm_elbow_roll">
-    <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
   </joint>
   <actuator name="arm_elbow_roll_motor">
-    <hardwareInterface>EffortJointInterface</hardwareInterface>
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     <mechanicalReduction>1</mechanicalReduction>
   </actuator>
 </transmission>
 
-
-
-<!-- Control joint defination for Gazebo --> 
-<!-- <gazebo>
-  <joint name="capstan_arm">
-    <hardwareInterface>EffortJointInterface</hardwareInterface>
-  </joint>
-</gazebo>
-
-<gazebo>
-  <joint name="base_arm_rot">
-    <hardwareInterface>EffortJointInterface</hardwareInterface>
-  </joint>
-</gazebo>
-
-<gazebo>
-  <joint name="arm_elbow">
-    <hardwareInterface>EffortJointInterface</hardwareInterface>
-  </joint>
-</gazebo>
-
-<gazebo>
-  <joint name="arm_elbow_roll">
-    <hardwareInterface>EffortJointInterface</hardwareInterface>
-  </joint>
-</gazebo> -->
   <!-- Gazebo control recq -->
   <!-- Gazebo will go black if no controller is defined and uncommented -->
- <gazebo>
-  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"/>
-    <robotNamespace> Adesh_Arm </robotNamespace>
-</gazebo> 
+  <gazebo>
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    <robotNamespace>/Adesh_Arm</robotNamespace>
+    <robotParam>/robot_description</robotParam>
+  </plugin>
+</gazebo>
 </robot>
