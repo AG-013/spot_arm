@@ -2,8 +2,19 @@
 <!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
      Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<!-- Owner: Adesh Grewal
+    email: adeshgrewalwk@gmail.com -->
 <robot
   name="robotic_arm">
+  <link name="world"/>
+
+  <!-- JOINT b/W WORLD - BASE -->
+  <joint name="base_link_fixed" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
   <link
     name="base_link">
     <inertial>
@@ -33,14 +44,16 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://robotic_arm/meshes/base_link.STL" />
+        <box size=  " 0.5 0.2 0.001" />
       </geometry>
+      <material
+        name= " collision material">
+        <color
+          rgba = " 1.0 0.5 0.0 0.6">
+      </color>
+    </material>
     </collision>
   </link>
-  <gazebo reference="base_link" >
-    <static>true</static>
-  </gazebo>
   <link
     name="capstan_drive">
     <inertial>
@@ -60,10 +73,10 @@
     <visual>
       <origin
         xyz="0 0 -0.049"
-        rpy="1.5708 0 0" />
+        rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://robotic_arm/meshes/capstan_drive.STL" />
+          filename="package://robotic_arm/gazebo_models/visual/capstan_drive.stl" />
       </geometry>
       <material
         name="">
@@ -73,14 +86,16 @@
     </visual>
     <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0 0 -0.05"
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://robotic_arm/meshes/capstan_drive.STL" />
+          filename="package://robotic_arm/gazebo_models/collision/capstan_collision/capstan_collision.stl" />
       </geometry>
     </collision>
   </link>
+
+  <!-- JOINT B/W CAPSTAN - BASE -->
   <joint
     name="base_capstan"
     type="fixed">
@@ -94,7 +109,7 @@
     <axis
       xyz="0 0 0" />
   </joint>
-  <link
+<link
     name="arm_base">
     <inertial>
       <origin
@@ -112,11 +127,11 @@
     </inertial>
     <visual>
       <origin
-        xyz="0 -0.09 -0.06"
-        rpy="1.5708 0 -1.5708" />
+        xyz="0 0 0"
+        rpy="0 0 -1.5708" />
       <geometry>
         <mesh
-          filename="package://robotic_arm/meshes/arm_base.STL" />
+          filename="package://robotic_arm/gazebo_models/visual/arm_base.stl" />
       </geometry>
       <material
         name="">
@@ -127,10 +142,10 @@
     <collision>
       <origin
         xyz="0 0 0"
-        rpy="0 0 0" />
+        rpy="0 0 -1.5708" />
       <geometry>
         <mesh
-          filename="package://robotic_arm/meshes/arm_base.STL" />
+         filename="package://robotic_arm/gazebo_models/collision/arm_base_collision.stl" />
       </geometry>
     </collision>
   </link>
@@ -150,9 +165,12 @@
       lower="-1.4"
       upper="1.4"
       effort="36"
-      velocity="0.2" />
-  </joint>
-  <link
+      velocity="0.2" /> <!-- should be 0.2 -->
+    </joint>
+
+<!-- ARM LINK - 1 -->
+
+ <link
     name="arm_link_1">
     <inertial>
       <origin
@@ -170,11 +188,11 @@
     </inertial>
     <visual>
       <origin
-        xyz="0.09 0 -0.16"
-        rpy="1.5708 0 0" />
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://robotic_arm/meshes/arm_link_1.STL" />
+          filename="package://robotic_arm/gazebo_models/visual/arm_link_1.stl" />
       </geometry>
       <material
         name="">
@@ -188,7 +206,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://robotic_arm/meshes/arm_link_1.STL" />
+          filename="package://robotic_arm/gazebo_models/collision/arm_link_1_collision.stl" />
       </geometry>
     </collision>
   </link>
@@ -213,14 +231,14 @@
   <link name="arm_link_1_helper">
   <inertial>
     <origin xyz="0 0 0" rpy="0 0 0"/>
-    <mass value="0.001"/>  <!-- Small mass to avoid issues -->
-    <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    <mass value="0.001"/>  <!--Small mass to avoid issues -->
+  <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
   </inertial>
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <box size="0.01 0.01 0.01"/>  <!-- Small invisible cube -->
-    </geometry>
+      <box size="0.01 0.01 0.01"/>  <!--Small invisible cube -->
+   </geometry>
     <material name="black"/>
   </visual>
 </link>
@@ -242,7 +260,8 @@
       effort="12"
       velocity="0.15" />
   </joint>
-  <link
+
+<link
     name="arm_link_2">
     <inertial>
       <origin
@@ -260,11 +279,11 @@
     </inertial>
     <visual>
       <origin
-        xyz="0.084 0 -0.77"
-        rpy="1.5708 0 0" />
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://robotic_arm/meshes/arm_link_2.STL" />
+          filename="package://robotic_arm/gazebo_models/visual/arm_link_2.stl" />
       </geometry>
       <material
         name="">
@@ -278,15 +297,16 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://robotic_arm/meshes/arm_link_2.STL" />
+          filename="package://robotic_arm/gazebo_models/collision/arm_link_2_collision.stl" />
       </geometry>
     </collision>
+    
   </link>
   <joint
     name="arm_elbow"
     type="revolute">
     <origin
-      xyz="4.1173E-05 0.005238 0.1"
+      xyz="4.1173E-05 0.005238 0.125"
       rpy="0.0068467 -0.00071181 0" />
     <parent
       link="arm_link_1_helper" />
@@ -295,11 +315,9 @@
     <axis
       xyz="0 1 0" />
     <limit
-      lower="-1.4"
+      lower="-1.4"  
       upper="1.4"
       effort="12"
       velocity="0.15" />
-  </joint>
-
-  
+  </joint> 
 </robot>
