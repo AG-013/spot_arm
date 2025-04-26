@@ -69,10 +69,10 @@
     <visual>
       <origin
         xyz="0 0 -0.049"
-        rpy="0 0 0" />
+        rpy="1.5708 0 0" />
       <geometry>
         <mesh
-          filename="package://robotic_arm/gazebo_models/visual/capstan_drive.stl" />
+          filename="package://robotic_arm/meshes/capstan_drive.STL" />
       </geometry>
       <material
         name="">
@@ -123,11 +123,11 @@
     </inertial>
     <visual>
       <origin
-        xyz="0 0 0"
-        rpy="0 0 -1.5708" />
+        xyz="0 -0.09 -0.06"
+        rpy="1.5708 0 -1.5708" />
       <geometry>
         <mesh
-          filename="package://robotic_arm/gazebo_models/visual/arm_base.stl" />
+          filename="package://robotic_arm/meshes/arm_base.STL" />
       </geometry>
       <material
         name="">
@@ -166,7 +166,7 @@
 
 <!-- ARM LINK - 1 -->
 
-  <link
+   <link
     name="arm_link_1">
     <inertial>
       <origin
@@ -184,11 +184,11 @@
     </inertial>
     <visual>
       <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+        xyz="0.09 0 -0.16"
+        rpy="1.5708 0 0" />
       <geometry>
         <mesh
-          filename="package://robotic_arm/gazebo_models/visual/arm_link_1.stl" />
+          filename="package://robotic_arm/meshes/arm_link_1.STL" />
       </geometry>
       <material
         name="">
@@ -206,6 +206,9 @@
       </geometry>
     </collision>
   </link>
+
+
+  <!-- ARM LINK 2 -->
   <joint
     name="base_arm_rot"
     type="revolute">
@@ -275,11 +278,11 @@
     </inertial>
     <visual>
       <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+        xyz="0.084 0 -0.77"
+        rpy="1.5708 0 0" />
       <geometry>
         <mesh
-          filename="package://robotic_arm/gazebo_models/visual/arm_link_2.stl" />
+          filename="package://robotic_arm/meshes/arm_link_2.STL" />
       </geometry>
       <material
         name="">
@@ -315,7 +318,7 @@
       upper="1.4"
       effort="12"
       velocity="0.15" />
-  </joint>
+  </joint> -->
 
 
 <!-- Transmission tags for gazebo -->
