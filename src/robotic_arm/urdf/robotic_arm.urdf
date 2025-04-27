@@ -35,7 +35,8 @@
           rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
-    <collision>
+
+  <!--   <collision>
       <origin
         xyz="0 0 0"
         rpy="0 0 0" />
@@ -48,7 +49,7 @@
           rgba = " 1.0 0.5 0.0 0.6">
       </color>
     </material>
-    </collision>
+    </collision> -->
   </link>
   <link
     name="capstan_drive">
@@ -80,7 +81,7 @@
           rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
-    <collision>
+   <!--  <collision>
       <origin
         xyz="0 0 -0.05"
         rpy="0 0 0" />
@@ -88,7 +89,7 @@
         <mesh
           filename="package://robotic_arm/gazebo_models/collision/capstan_collision/capstan_collision.stl" />
       </geometry>
-    </collision>
+    </collision> -->
   </link>
 
   <!-- JOINT B/W CAPSTAN - BASE -->
@@ -105,6 +106,9 @@
     <axis
       xyz="0 0 0" />
   </joint>
+
+
+<!-- ARM BASE  -->
 <link
     name="arm_base">
     <inertial>
@@ -135,7 +139,7 @@
           rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
-    <collision>
+  <!--   <collision>
       <origin
         xyz="0 0 0"
         rpy="0 0 -1.5708" />
@@ -143,8 +147,10 @@
         <mesh
          filename="package://robotic_arm/gazebo_models/collision/arm_base_collision.stl" />
       </geometry>
-    </collision>
+    </collision> -->
   </link>
+
+  <!-- Capstan to arm Base -->
   <joint
     name="capstan_arm"
     type="revolute">
@@ -161,11 +167,47 @@
       lower="-1.4"
       upper="1.4"
       effort="36"
-      velocity="0.2" /> <!-- should be 0.2 -->
+      velocity="0.2" /> 
     </joint>
 
-<!-- ARM LINK - 1 -->
+<!-- arm base to link 1 rotation joint -->
+ <joint
+    name="base_arm_rot"
+    type="revolute">
+    <origin
+      xyz="-0.0072956 0 0.1"
+      rpy="0 0.00035591 -1.5708" />
+    <parent
+      link="arm_base" />
+    <child
+      link="arm_link_1" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-0.5"
+      upper="1.35"
+      effort="25"
+      velocity="0.1" />
+  </joint>
 
+
+<!-- Rotation Helper for joint 1 -->
+  <link name="arm_link_1_helper">
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="0.001"/>  
+  <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.01 0.01 0.01"/>  
+   </geometry>
+    <material name="black"/>
+  </visual>
+</link> 
+
+<!-- ARM LINK - 1 -->
    <link
     name="arm_link_1">
     <inertial>
@@ -196,7 +238,7 @@
           rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
-    <collision>
+   <!--  <collision>
       <origin
         xyz="0 0 0"
         rpy="0 0 0" />
@@ -204,43 +246,11 @@
         <mesh
           filename="package://robotic_arm/gazebo_models/collision/arm_link_1_collision.stl" />
       </geometry>
-    </collision>
+    </collision> -->
   </link>
 
 
-  <!-- ARM LINK 2 -->
-  <joint
-    name="base_arm_rot"
-    type="revolute">
-    <origin
-      xyz="-0.0072956 0 0.1"
-      rpy="0 0.00035591 -1.5708" />
-    <parent
-      link="arm_base" />
-    <child
-      link="arm_link_1" />
-    <axis
-      xyz="0 -1 0" />
-    <limit
-      lower="-0.5"
-      upper="1.35"
-      effort="25"
-      velocity="0.1" />
-  </joint>
-  <link name="arm_link_1_helper">
-  <inertial>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-    <mass value="0.001"/>  
-  <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
-  </inertial>
-  <visual>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-    <geometry>
-      <box size="0.01 0.01 0.01"/>  
-   </geometry>
-    <material name="black"/>
-  </visual>
-</link>
+<!-- Arm link 1 to 2 helper -->
   <joint
     name="arm_elbow_roll"
     type="revolute">
@@ -260,6 +270,8 @@
       velocity="0.15" />
   </joint>
 
+
+  <!-- ARM LINK 2 -->
 <link
     name="arm_link_2">
     <inertial>
@@ -290,6 +302,7 @@
           rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
+    <!-- 
     <collision>
       <origin
         xyz="0 0 0"
@@ -298,9 +311,11 @@
         <mesh
           filename="package://robotic_arm/gazebo_models/collision/arm_link_2_collision.stl" />
       </geometry>
-    </collision>
-    
-  </link>
+    </collision> -->
+     </link>
+
+
+    <!-- Arm elbow joint helper to arm link 2 --> 
   <joint
     name="arm_elbow"
     type="revolute">
@@ -318,7 +333,7 @@
       upper="1.4"
       effort="12"
       velocity="0.15" />
-  </joint> -->
+  </joint> 
 
 
 <!-- Transmission tags for gazebo -->
