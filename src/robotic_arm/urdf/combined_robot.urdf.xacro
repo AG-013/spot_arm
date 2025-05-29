@@ -1,0 +1,17 @@
+<robot name="biped_with_arm" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- Load CHAMP robot as flat URDF -->
+  <xacro:include filename="$(find spot_description)/urdf/spot.urdf"/>
+
+  <!-- Mount robotic arm -->
+  <xacro:include filename="$(find robotic_arm)/urdf/spot-arm.urdf"/>
+
+  
+  <!-- Static fixed joint to mount to biped body -->
+  <joint name="arm_mount" type="fixed">
+    <parent link="body"/>
+    <child link="arm_base_link"/> <!-- Replace with your base link -->
+    <origin xyz="-0.2 0 0.09" rpy="0 0 0"/>
+  </joint>
+
+</robot>
